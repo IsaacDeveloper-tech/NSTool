@@ -1,10 +1,15 @@
-from classes.LogSystem import LogTypes, Log
+from models.Machine import Machine
 
-print(LogTypes.INFO)
+machines = Machine()
 
-log = Log()
+machines.createMachine({
+    "name"          : "TMC",
+    "ip_direction"  : "172.19.145.67"
+})
 
-log.writeLog("Hola", LogTypes.DEBUG)
-log.writeLog("Hola", LogTypes.WARNING)
-log.writeLog("Hola", LogTypes.INFO)
-log.writeLog("Hola", LogTypes.ERROR)
+machines.createMachine({
+    "name"          : "TRAM",
+    "ip_direction"  : "172.19.145.68"
+})
+
+print(machines.getMachinesByName("TM"))
