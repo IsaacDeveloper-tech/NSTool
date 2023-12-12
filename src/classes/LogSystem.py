@@ -4,6 +4,13 @@ import datetime
 # Constants
 PATH_LOG = ".\\NSTool.log"
 
+# Log types
+class LogTypes:
+    INFO    = "INFO"
+    WARNING = "WARNING"
+    ERROR   = "ERROR"
+    DEBUG   = "DEBUG"
+
 # Class
 class Log:
     __LogFile = File(PATH_LOG)
@@ -11,5 +18,8 @@ class Log:
     def __init__(self):
         pass
 
-    def writeLog(self, content):
-        self.__LogFile.writeFile(f"{datetime.datetime.now()} | {content}\n")
+    def writeLog(self, content, type_log):
+        self.__LogFile.writeFile(f"{datetime.datetime.now()} | [{type_log}] | {content}\n")
+
+        if(type_log == LogTypes.ERROR):
+            raise Exception(content)
