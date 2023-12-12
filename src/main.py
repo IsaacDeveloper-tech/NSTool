@@ -1,6 +1,6 @@
-from models.Machine import Machine
+from models.Machines import Machines
 
-machines = Machine()
+machines = Machines()
 
 machines.createMachine({
     "name"          : "TMC",
