@@ -1,5 +1,5 @@
-from classes.FileSystem import File
-from classes.LogSystem import Log, LogTypes
+from src.classes.FileSystem import File
+from src.classes.LogSystem import Log, LogTypes
 
 MACHINES_FILE = ".\\machines.json"
 class Machines:

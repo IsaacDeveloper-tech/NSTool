@@ -1,4 +1,4 @@
-from classes.FileSystem import File
+from src.classes.FileSystem import File
 import datetime
 
 # Constants
