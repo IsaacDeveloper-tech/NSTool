@@ -1,6 +1,7 @@
 from src.interfaces.IWindow import IWindow
 from src.classes.ComponentSystem import Component
 from src.models.Machines import Machines
+from src.models.Machine import Machine
 from tkinter import *
 
 class AddMachineView(IWindow):
@@ -14,13 +15,8 @@ class AddMachineView(IWindow):
         pass
 
     def saveMachine(self, name_machine, ip_machine):
-        machine = {
-            "name"  : name_machine,
-            "ip"    : ip_machine
-        }
-
         machines = Machines()
-        machines.createMachine(machine)
+        machines.createMachine(Machine(name_machine, ip_machine))
 
     # Vista de la pantalla
     def show(self):

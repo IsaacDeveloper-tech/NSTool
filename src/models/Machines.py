@@ -1,5 +1,7 @@
 from src.classes.FileSystem import File
 from src.classes.LogSystem import Log, LogTypes
+from src.models.Machine import Machine
+# TODO: Pasar __machines de Dict a Machine (REPASAR)
 
 MACHINES_FILE = ".\\machines.json"
 class Machines:
@@ -17,21 +19,35 @@ class Machines:
         if(len(temp_content) == 0):
             self.__file.writeFile([])
         
-        self.__machines = self.__file.readFile("json")
+        # Guardar en objetos Machine
+        machines_dict = self.__file.readFile("json")
+        
+        if(len(self.__machines) == 0):
+            for machine in machines_dict:
+                self.__machines.append(Machine(machine["name"], machine["ip"]))
 
     def saveDataMachine(self):
         self.__file.cleanFile()
-        self.__file.writeFile(self.__machines)
+
+        machines_dict = []
+
+        for index in range(0, len(self.__machines)):
+            machines_dict.append({
+                "name": self.__machines[index].getName(),
+                "ip" : self.__machines[index].getIpDirection()
+            })
+
+        self.__file.writeFile(machines_dict)
         self.__log.writeLog("saveDataMachine: Se han guardado los datos correctamente", LogTypes.INFO)
 
-    def createMachine(self, machine:dict = None):
+    def createMachine(self, machine:Machine = None):
         if(machine == None):
             self.__log.writeLog("createMachine: NO se han introducido los parámetros necesarios", LogTypes.ERROR)
 
         self.__machines.append(machine)
         self.saveDataMachine()
 
-    def updateMachine(self, machine_updated:dict = None, index:int = None):
+    def updateMachine(self, machine_updated:Machine = None, index:int = None):
         if(machine_updated == None or index == None):
             self.__log.writeLog("updateMachine: NO se han introducido los parámetros necesarios", LogTypes.ERROR)
         
